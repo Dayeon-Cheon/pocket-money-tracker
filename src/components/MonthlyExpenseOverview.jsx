@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const MonthlyExpenseOverview = ({ selectedMonth, expenses }) => {
   return (
     <section>
@@ -10,15 +12,17 @@ const MonthlyExpenseOverview = ({ selectedMonth, expenses }) => {
             )
             .map((expense) => (
               <li key={expense.id}>
-                <span>{expense.date}</span>
-                <span>{expense.item}</span>
-                <span>{expense.amount}</span>
-                <span>
-                  {/* 나중에 css로 구현? */}
-                  {expense.description.length > 50
-                    ? expense.description.slice(0, 47) + "..."
-                    : expense.description}
-                </span>
+                <Link to={`/detail/${expense.id}`} state={expense}>
+                  <span>{expense.date}</span>
+                  <span>{expense.item}</span>
+                  <span>{expense.amount}</span>
+                  <span>
+                    {/* 나중에 css로 구현? */}
+                    {expense.description.length > 50
+                      ? expense.description.slice(0, 47) + "..."
+                      : expense.description}
+                  </span>
+                </Link>
               </li>
             ))}
         </ul>

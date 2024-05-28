@@ -14,11 +14,6 @@ const ExpenseForm = ({ setExpenses }) => {
     const amount = amountInputRef.current.value;
     const description = descriptionInputRef.current.value;
 
-    console.log(date);
-    console.log(item);
-    console.log(amount);
-    console.log(description);
-
     if (!date.trim() || !item.trim() || !amount.trim() || !description.trim()) {
       alert("모든 항목을 입력해 주세요.");
       return;
@@ -56,7 +51,6 @@ const ExpenseForm = ({ setExpenses }) => {
             <label htmlFor="date">날짜</label>
             <input
               ref={dateInputRef}
-              name="date"
               id="date"
               type="text"
               placeholder="YYYY-MM-DD"
@@ -64,7 +58,6 @@ const ExpenseForm = ({ setExpenses }) => {
             <label htmlFor="item">항목</label>
             <input
               ref={itemInputRef}
-              name="item"
               id="item"
               type="text"
               placeholder="지출 항목"
@@ -72,7 +65,6 @@ const ExpenseForm = ({ setExpenses }) => {
             <label htmlFor="amount">금액</label>
             <input
               ref={amountInputRef}
-              name="amount"
               id="amount"
               type="text"
               placeholder="지출 금액"
