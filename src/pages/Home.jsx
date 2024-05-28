@@ -6,7 +6,7 @@ function Home({ selectedMonth, setSelectedMonth, expenses, setExpenses }) {
   return (
     <>
       {/* 지출 등록 컴포넌트 */}
-      <ExpenseForm />
+      <ExpenseForm setExpenses={setExpenses} />
       {/* 월 선택 컴포넌트 */}
       <MonthSelector
         selectedMonth={selectedMonth}

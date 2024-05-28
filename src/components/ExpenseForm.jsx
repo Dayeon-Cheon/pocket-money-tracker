@@ -1,35 +1,61 @@
-const ExpenseForm = () => {
-  const addExpense = (e) => {
+import { useRef } from "react";
+
+const ExpenseForm = ({ setExpenses }) => {
+  const dateInputRef = useRef("");
+  const itemInputRef = useRef("");
+  const amountInputRef = useRef("");
+  const descriptionInputRef = useRef("");
+
+  const handleSubmitExpense = (e) => {
     e.preventDefault();
 
-    // const formData = new FormData(e.target);
-    // const title = formData.get("title");
-    // const content = formData.get("content");
+    const date = dateInputRef.current.value;
+    const item = itemInputRef.current.value;
+    const amount = amountInputRef.current.value;
+    const description = descriptionInputRef.current.value;
 
-    // if (!title.trim() || !content.trim()) {
-    //   alert("제목과 내용을 모두 입력해 주세요.");
-    //   return;
-    // }
+    console.log(date);
+    console.log(item);
+    console.log(amount);
+    console.log(description);
 
-    // const newTodo = {
-    //   id: crypto.randomUUID(),
-    //   title,
-    //   content,
-    //   isDone: false,
-    // };
+    if (!date.trim() || !item.trim() || !amount.trim() || !description.trim()) {
+      alert("모든 항목을 입력해 주세요.");
+      return;
+    }
 
-    // setTodos((prevTodos) => [newTodo, ...prevTodos]);
+    const dateFormat = /^\d{4}-\d{2}-\d{2}$/;
+    if (!date.match(dateFormat)) {
+      alert("날짜 형식이 올바르지 않습니다.");
+      return;
+    }
 
-    // e.target.reset();
+    if (isNaN(amount)) {
+      alert("금액은 숫자만 입력해 주세요.");
+      return;
+    }
+
+    const newExpense = {
+      id: crypto.randomUUID(),
+      date,
+      item,
+      amount,
+      description,
+    };
+
+    setExpenses((prevExpenses) => [newExpense, ...prevExpenses]);
+
+    e.target.reset();
   };
 
   return (
     <section>
-      <form onSubmit={addExpense}>
+      <form onSubmit={handleSubmitExpense}>
         <div>
           <div>
             <label htmlFor="date">날짜</label>
             <input
+              ref={dateInputRef}
               name="date"
               id="date"
               type="text"
@@ -37,6 +63,7 @@ const ExpenseForm = () => {
             ></input>
             <label htmlFor="item">항목</label>
             <input
+              ref={itemInputRef}
               name="item"
               id="item"
               type="text"
@@ -44,6 +71,7 @@ const ExpenseForm = () => {
             ></input>
             <label htmlFor="amount">금액</label>
             <input
+              ref={amountInputRef}
               name="amount"
               id="amount"
               type="text"
@@ -51,6 +79,7 @@ const ExpenseForm = () => {
             ></input>
             <label htmlFor="description">내용</label>
             <input
+              ref={descriptionInputRef}
               name="description"
               id="description"
               type="text"
