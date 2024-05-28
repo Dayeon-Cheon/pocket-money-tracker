@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ExpenseContext } from "../context/ExpenseContext";
 
-const MonthlyExpenseOverview = ({ selectedMonth, expenses }) => {
+const MonthlyExpenseOverview = () => {
+  const { selectedMonth, expenses } = useContext(ExpenseContext);
+
   return (
     <section>
       <div>

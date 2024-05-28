@@ -1,6 +1,9 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { ExpenseContext } from "../context/ExpenseContext";
 
-const ExpenseForm = ({ setExpenses }) => {
+const ExpenseForm = () => {
+  const { setExpenses } = useContext(ExpenseContext);
+
   const dateInputRef = useRef("");
   const itemInputRef = useRef("");
   const amountInputRef = useRef("");

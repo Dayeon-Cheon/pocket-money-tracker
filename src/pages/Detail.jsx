@@ -1,7 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { ExpenseContext } from "../context/ExpenseContext";
 
-const Detail = ({ setExpenses }) => {
+const Detail = () => {
+  const { setExpenses } = useContext(ExpenseContext);
+
   const location = useLocation();
   const navigate = useNavigate();
   const expense = location.state;
