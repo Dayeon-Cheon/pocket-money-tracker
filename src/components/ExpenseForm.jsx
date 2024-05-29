@@ -1,8 +1,9 @@
-import { useRef, useContext } from "react";
-import { ExpenseContext } from "../context/ExpenseContext";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { addExpense } from "../redux/slices/expensesSlice";
 
 const ExpenseForm = () => {
-  const { setExpenses } = useContext(ExpenseContext);
+  const dispatch = useDispatch();
 
   const dateInputRef = useRef("");
   const itemInputRef = useRef("");
@@ -41,7 +42,7 @@ const ExpenseForm = () => {
       description,
     };
 
-    setExpenses((prevExpenses) => [newExpense, ...prevExpenses]);
+    dispatch(addExpense(newExpense));
 
     e.target.reset();
   };

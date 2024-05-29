@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRef, useContext } from "react";
-import { ExpenseContext } from "../context/ExpenseContext";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { updateExpense, removeExpense } from "../redux/slices/expensesSlice";
 
 const Detail = () => {
-  const { setExpenses } = useContext(ExpenseContext);
+  const dispatch = useDispatch();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -39,24 +40,21 @@ const Detail = () => {
     }
 
     const updatedExpense = {
-      ...expense,
+      id: expense.id,
       date,
       item,
       amount,
       description,
     };
 
-    setExpenses((prevExpenses) =>
-      prevExpenses.map((exp) => (exp.id === expense.id ? updatedExpense : exp))
-    );
+    dispatch(updateExpense(updatedExpense));
 
     navigate(-1);
   };
 
   const handleDeleteExpense = () => {
-    setExpenses((prevExpenses) =>
-      prevExpenses.filter((exp) => exp.id !== expense.id)
-    );
+    dispatch(removeExpense(expense.id));
+
     navigate(-1);
   };
 

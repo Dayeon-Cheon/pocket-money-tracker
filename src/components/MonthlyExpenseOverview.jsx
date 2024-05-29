@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { ExpenseContext } from "../context/ExpenseContext";
+import { useSelector } from "react-redux";
 
 const MonthlyExpenseOverview = () => {
-  const { selectedMonth, expenses } = useContext(ExpenseContext);
+  const selectedMonth = useSelector((state) => state.expenses.selectedMonth);
+  const expenses = useSelector((state) => state.expenses.expenses);
 
   return (
     <section>

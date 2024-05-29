@@ -1,18 +1,19 @@
 import styled from "styled-components";
-import { useEffect, useContext } from "react";
-import { ExpenseContext } from "../context/ExpenseContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedMonth } from "../redux/slices/expensesSlice";
 
 const MonthButton = styled.button`
   background-color: ${(props) => (props.$isSelected ? "blue" : "white")};
 `;
 
 const MonthSelector = () => {
-  const { selectedMonth, setSelectedMonth } = useContext(ExpenseContext);
   const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const selectedMonth = useSelector((state) => state.expenses.selectedMonth);
 
-  useEffect(() => {
-    localStorage.setItem("month", selectedMonth);
-  }, [selectedMonth]);
+  const dispatch = useDispatch();
+  const handleMonthChange = (month) => {
+    dispatch(setSelectedMonth(month));
+  };
 
   return (
     <section>
@@ -21,7 +22,7 @@ const MonthSelector = () => {
           <MonthButton
             key={month}
             $isSelected={selectedMonth === month}
-            onClick={() => setSelectedMonth(month)}
+            onClick={() => handleMonthChange(month)}
           >
             {month}월
           </MonthButton>
