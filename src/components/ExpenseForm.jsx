@@ -6,20 +6,25 @@ import styled from "styled-components";
 const ExpenseForm = () => {
   const dispatch = useDispatch();
 
-  const dateInputRef = useRef("");
-  const itemInputRef = useRef("");
-  const amountInputRef = useRef("");
-  const descriptionInputRef = useRef("");
+  const dateInputRef = useRef(null);
+  const itemInputRef = useRef(null);
+  const amountInputRef = useRef(null);
+  const descriptionInputRef = useRef(null);
 
   const handleSubmitExpense = (e) => {
     e.preventDefault();
 
     const date = dateInputRef.current.value;
     const item = itemInputRef.current.value;
-    const amount = amountInputRef.current.value;
+    const amount = parseFloat(amountInputRef.current.value);
     const description = descriptionInputRef.current.value;
 
-    if (!date.trim() || !item.trim() || !amount.trim() || !description.trim()) {
+    if (
+      !date.trim() ||
+      !item.trim() ||
+      !amountInputRef.current.value.trim() ||
+      !description.trim()
+    ) {
       alert("모든 항목을 입력해 주세요.");
       return;
     }
@@ -67,7 +72,7 @@ const ExpenseForm = () => {
           <ExpenseInput
             ref={amountInputRef}
             id="amount"
-            type="text"
+            type="number"
             placeholder="지출 금액"
           ></ExpenseInput>
           <ExpenseInput
