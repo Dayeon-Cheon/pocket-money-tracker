@@ -5,17 +5,20 @@ import styled from "styled-components";
 const MonthlyExpenseOverview = () => {
   const selectedMonth = useSelector((state) => state.expenses.selectedMonth);
   const expenses = useSelector((state) => state.expenses.expenses);
+  const filteredExpenses = expenses.filter(
+    (expense) => parseInt(expense.date.substring(5, 7), 10) === selectedMonth
+  );
 
   return (
     <ExpenseListSection>
       <div>
         <ul>
-          {expenses
-            .filter(
-              (expense) =>
-                parseInt(expense.date.substring(5, 7), 10) === selectedMonth
-            )
-            .map((expense) => (
+          {filteredExpenses.length == 0 ? (
+            <NoExpenseMessageDiv>
+              지출 내역이 존재하지 않습니다.
+            </NoExpenseMessageDiv>
+          ) : (
+            filteredExpenses.map((expense) => (
               <ExpenseListItem key={expense.id}>
                 <ExpenseItemLink to={`/detail/${expense.id}`} state={expense}>
                   <ExpenseLeftDiv>
@@ -29,11 +32,12 @@ const MonthlyExpenseOverview = () => {
                     </ExpenseContentSpan>
                   </ExpenseLeftDiv>
                   <ExpenseRightDiv>
-                    <span>{expense.amount}&nbsp;원</span>
+                    {expense.amount.toLocaleString()}&nbsp;원
                   </ExpenseRightDiv>
                 </ExpenseItemLink>
               </ExpenseListItem>
-            ))}
+            ))
+          )}
         </ul>
       </div>
     </ExpenseListSection>
@@ -47,6 +51,12 @@ const ExpenseListSection = styled.section`
   margin-top: 20px;
   border-radius: 10px;
   background-color: white;
+`;
+
+const NoExpenseMessageDiv = styled.div`
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 const ExpenseListItem = styled.li`
