@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { updateExpense, removeExpense } from "../redux/slices/expensesSlice";
+import styled from "styled-components";
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -63,41 +64,102 @@ const Detail = () => {
   };
 
   return (
-    <section>
-      <div>
+    <InputFormSection>
+      <FormDiv>
         <label htmlFor="date">날짜</label>
-        <input
+        <ExpenseInput
           ref={dateInputRef}
           id="date"
           type="text"
           defaultValue={expense.date}
-        ></input>
-        <input
+        ></ExpenseInput>
+        <label htmlFor="item">항목</label>
+        <ExpenseInput
           ref={itemInputRef}
           id="item"
           type="text"
           defaultValue={expense.item}
-        ></input>
-        <input
+        ></ExpenseInput>
+        <label htmlFor="amount">금액</label>
+        <ExpenseInput
           ref={amountInputRef}
           id="amount"
           type="text"
           defaultValue={expense.amount}
-        ></input>
-        <input
+        ></ExpenseInput>
+        <label htmlFor="description">내용</label>
+        <ExpenseInput
           ref={descriptionInputRef}
           id="description"
           type="text"
           defaultValue={expense.description}
-        ></input>
-      </div>
-      <div>
-        <button onClick={handleUpdateExpense}>수정</button>
-        <button onClick={handleDeleteExpense}>삭제</button>
-        <button onClick={handleGoBack}>뒤로 가기</button>
-      </div>
-    </section>
+        ></ExpenseInput>
+      </FormDiv>
+      <ButtonDiv>
+        <div>
+          <StyledButton onClick={handleUpdateExpense} variant="update">
+            수정
+          </StyledButton>
+          <StyledButton onClick={handleDeleteExpense} variant="delete">
+            삭제
+          </StyledButton>
+        </div>
+        <div>
+          <StyledButton onClick={handleGoBack} variant="back">
+            뒤로 가기
+          </StyledButton>
+        </div>
+      </ButtonDiv>
+    </InputFormSection>
   );
 };
 
 export default Detail;
+
+const InputFormSection = styled.section`
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+`;
+
+const FormDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const ExpenseInput = styled.input`
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 800px;
+  height: 26px;
+  font-size: 16px;
+`;
+
+const ButtonDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+const StyledButton = styled.button`
+  background-color: ${(props) => {
+    if (props.variant === "update") return "orange";
+    if (props.variant === "delete") return "#d40000";
+    if (props.variant === "back") return "#616161";
+    return "blue";
+  }};
+  &:hover {
+    opacity: 0.8;
+  }
+  border: none;
+  border-radius: 6px;
+  width: 100px;
+  height: 34px;
+  color: white;
+  cursor: pointer;
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+`;
