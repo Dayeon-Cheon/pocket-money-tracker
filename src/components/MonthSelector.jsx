@@ -43,10 +43,13 @@ const MonthButtonContainer = styled.div`
 `;
 
 const MonthButton = styled.button`
-  background-color: ${(props) => (props.$isSelected ? "orange" : "white")};
-  border: 1px solid #ccc;
+  background-color: ${(props) => (props.$isSelected ? "orange" : "#e0e0e0")};
+  border: none;
   border-radius: 6px;
   width: 60px;
-  height: 30px;
+  height: 40px;
   cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 `;

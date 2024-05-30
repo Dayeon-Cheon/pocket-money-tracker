@@ -102,11 +102,13 @@ const ExpenseInput = styled.input`
   border-radius: 6px;
   border: 1px solid #ccc;
   width: 160px;
+  height: 26px;
 `;
 
 const SaveButton = styled.button`
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 6px;
+  background-color: orange;
   width: 100px;
   cursor: pointer;
 `;
