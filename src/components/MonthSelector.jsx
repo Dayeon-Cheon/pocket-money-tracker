@@ -1,10 +1,6 @@
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedMonth } from "../redux/slices/expensesSlice";
-
-const MonthButton = styled.button`
-  background-color: ${(props) => (props.$isSelected ? "blue" : "white")};
-`;
+import styled from "styled-components";
 
 const MonthSelector = () => {
   const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -16,8 +12,8 @@ const MonthSelector = () => {
   };
 
   return (
-    <section>
-      <div>
+    <MonthSelectingSection>
+      <MonthButtonContainer>
         {months.map((month) => (
           <MonthButton
             key={month}
@@ -27,9 +23,30 @@ const MonthSelector = () => {
             {month}월
           </MonthButton>
         ))}
-      </div>
-    </section>
+      </MonthButtonContainer>
+    </MonthSelectingSection>
   );
 };
 
 export default MonthSelector;
+
+const MonthSelectingSection = styled.section`
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  background-color: white;
+`;
+
+const MonthButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const MonthButton = styled.button`
+  background-color: ${(props) => (props.$isSelected ? "orange" : "white")};
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 60px;
+  height: 30px;
+  cursor: pointer;
+`;

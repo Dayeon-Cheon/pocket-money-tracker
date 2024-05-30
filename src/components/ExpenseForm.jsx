@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addExpense } from "../redux/slices/expensesSlice";
+import styled from "styled-components";
 
 const ExpenseForm = () => {
   const dispatch = useDispatch();
@@ -48,47 +49,64 @@ const ExpenseForm = () => {
   };
 
   return (
-    <section>
+    <InputFormSection>
       <form onSubmit={handleSubmitExpense}>
-        <div>
-          <div>
-            <label htmlFor="date">날짜</label>
-            <input
-              ref={dateInputRef}
-              id="date"
-              type="text"
-              placeholder="YYYY-MM-DD"
-            ></input>
-            <label htmlFor="item">항목</label>
-            <input
-              ref={itemInputRef}
-              id="item"
-              type="text"
-              placeholder="지출 항목"
-            ></input>
-            <label htmlFor="amount">금액</label>
-            <input
-              ref={amountInputRef}
-              id="amount"
-              type="text"
-              placeholder="지출 금액"
-            ></input>
-            <label htmlFor="description">내용</label>
-            <input
-              ref={descriptionInputRef}
-              name="description"
-              id="description"
-              type="text"
-              placeholder="지출 내용"
-            ></input>
-          </div>
-          <div>
-            <button type="submit">저장</button>
-          </div>
-        </div>
+        <FormDiv>
+          <ExpenseInput
+            ref={dateInputRef}
+            id="date"
+            type="text"
+            placeholder="날짜 (YYYY-MM-DD)"
+          ></ExpenseInput>
+          <ExpenseInput
+            ref={itemInputRef}
+            id="item"
+            type="text"
+            placeholder="지출 항목"
+          ></ExpenseInput>
+          <ExpenseInput
+            ref={amountInputRef}
+            id="amount"
+            type="text"
+            placeholder="지출 금액"
+          ></ExpenseInput>
+          <ExpenseInput
+            ref={descriptionInputRef}
+            name="description"
+            id="description"
+            type="text"
+            placeholder="지출 내용"
+          ></ExpenseInput>
+          <SaveButton type="submit">저장</SaveButton>
+        </FormDiv>
       </form>
-    </section>
+    </InputFormSection>
   );
 };
 
 export default ExpenseForm;
+
+const InputFormSection = styled.section`
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+`;
+
+const FormDiv = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const ExpenseInput = styled.input`
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 160px;
+`;
+
+const SaveButton = styled.button`
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100px;
+  cursor: pointer;
+`;
