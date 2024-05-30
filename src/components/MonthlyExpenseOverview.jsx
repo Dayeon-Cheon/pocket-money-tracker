@@ -20,13 +20,13 @@ const MonthlyExpenseOverview = () => {
                 <ExpenseItemLink to={`/detail/${expense.id}`} state={expense}>
                   <ExpenseLeftDiv>
                     <ExpenseDateSpan>{expense.date}</ExpenseDateSpan>
-                    <span>
+                    <ExpenseContentSpan>
                       {expense.item}
                       &nbsp;:&nbsp;
                       {expense.description.length > 50
                         ? expense.description.slice(0, 47) + "..."
                         : expense.description}
-                    </span>
+                    </ExpenseContentSpan>
                   </ExpenseLeftDiv>
                   <ExpenseRightDiv>
                     <span>{expense.amount}&nbsp;원</span>
@@ -78,7 +78,12 @@ const ExpenseDateSpan = styled.span`
   font-size: 14px;
 `;
 
+const ExpenseContentSpan = styled.span`
+  font-weight: bold;
+`;
+
 const ExpenseRightDiv = styled.div`
   display: flex;
   align-items: center;
+  font-weight: bold;
 `;
