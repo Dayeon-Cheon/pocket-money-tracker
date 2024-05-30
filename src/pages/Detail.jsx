@@ -97,15 +97,15 @@ const Detail = () => {
       </FormDiv>
       <ButtonDiv>
         <div>
-          <StyledButton onClick={handleUpdateExpense} variant="update">
+          <StyledButton onClick={handleUpdateExpense} $variant="update">
             수정
           </StyledButton>
-          <StyledButton onClick={handleDeleteExpense} variant="delete">
+          <StyledButton onClick={handleDeleteExpense} $variant="delete">
             삭제
           </StyledButton>
         </div>
         <div>
-          <StyledButton onClick={handleGoBack} variant="back">
+          <StyledButton onClick={handleGoBack} $variant="back">
             뒤로 가기
           </StyledButton>
         </div>
@@ -145,10 +145,9 @@ const ButtonDiv = styled.div`
 
 const StyledButton = styled.button`
   background-color: ${(props) => {
-    if (props.variant === "update") return "orange";
-    if (props.variant === "delete") return "#d40000";
-    if (props.variant === "back") return "#616161";
-    return "blue";
+    if (props.$variant === "update") return "orange";
+    if (props.$variant === "delete") return "#d40000";
+    if (props.$variant === "back") return "#616161";
   }};
   &:hover {
     opacity: 0.8;
